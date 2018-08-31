@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>자바스크립트 시계</title>
+		<style type="text/css">
+			.clock{width:500px;border:1px solid black;margin: 10% auto; text-align: center;}
+			.clock #time{padding: 30px 0px;}
+			.clock #time li{list-style: none;display: inline-block;}
+		</style>
+
+	</head>
+	<body>
+		<div class="clock">
+			<ul id="time">
+				<li id="hour"></li>
+				<li id="minute"></li>
+				<li id="second"></li>
+				<li id="meridiem"></li>
+			</ul>
+		</div>
+	</body>
+			<script type="text/javascript">
+			var getNowTimeFunc = function getNowTime() {
+				var now = new Date();
+				//현재 시간
+				var hour = now.getHours();
+				var minute = now.getMinutes();
+				var second = now.getSeconds();
+				var meridiem;
+
+				//12시간 표기로 변경
+				if(hour>12){
+					hour = hour-12;
+					meridiem = "pm";
+				}else{
+					hour = hour;
+					meridiem = "am";
+				}
+
+				//시,분,초가 10보다 작을 경우 앞에 0 붙이기
+				if(hour < 10) hour = "0"+hour;
+				if(minute<10) minute = "0"+minute;
+				if(second<10) second = "0"+second;
+
+				document.getElementById("hour").innerText = hour+"시";
+				document.getElementById("minute").innerText = minute+"분";
+				document.getElementById("second").innerText = second+"초";
+				document.getElementById("meridiem").innerText = meridiem;
+			}
+			//1초에 한번씩 갱신되도록 설정
+			setInterval(getNowTimeFunc, 1000);
+
+			</script>
+</html>
